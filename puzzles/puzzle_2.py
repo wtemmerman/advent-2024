@@ -3,7 +3,6 @@ import os
 from utils.file_reader import FileInputReader
 from utils.helper import get_puzzle_number
 
-
 # Get the current filename
 filename = os.path.basename(__file__)
 number = get_puzzle_number(filename)
@@ -34,7 +33,7 @@ def found_safe_report(reader: FileInputReader):
     print(f"Reading file {reader.file_path} line by line:")
     safe_count = 0
     for line in reader.read_line_by_line():
-        elements = list(map(int, line.split()))  # Convert elements to integers
+        elements = list(map(int, line.split()))
         if elements[0] == elements[1]:
             continue
 
@@ -48,7 +47,7 @@ def found_safe_report_with_dampener(reader: FileInputReader):
     safe_count = 0
 
     for line in reader.read_line_by_line():
-        elements = list(map(int, line.split()))  # Convert elements to integers
+        elements = list(map(int, line.split()))
 
         if is_safe(elements) or is_safe_with_dampener(elements):
             safe_count += 1

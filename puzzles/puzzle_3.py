@@ -13,13 +13,8 @@ def add_mul(reader: FileInputReader):
     print(f"Reading file {reader.file_path}:")
     corrupted_memory = "".join(reader.read_all_lines())
 
-    # Define regex pattern for valid mul(X,Y)
     pattern = r"mul\((\d{1,3}),(\d{1,3})\)"
-
-    # Find all valid matches
     matches = re.findall(pattern, corrupted_memory)
-
-    # Calculate the sum of the products
     total = 0
     for x, y in matches:
         product = int(x) * int(y)
@@ -27,6 +22,33 @@ def add_mul(reader: FileInputReader):
         # print(f"Valid instruction: mul({x},{y}) = {product}")
 
     print(f"Total sum: {total}")
+
+
+def sum_enabled_mul_instructions(reader: FileInputReader):
+    print(f"Reading file {reader.file_path}:")
+    corrupted_memory = "".join(reader.read_all_lines())
+
+    mul_regex = r"mul\((\d+),(\d+)\)"
+    control_regex = r"do\(\)|don't\(\)"
+
+    mul_enabled = True
+    total_sum = 0
+
+    for match in re.finditer(f"{mul_regex}|{control_regex}", corrupted_memory):
+        # print(match)
+        if match.group(0).startswith("mul"):
+            # Handle mul(X, Y) instructions
+            if mul_enabled:
+                x, y = map(int, match.groups()[:2])
+                total_sum += x * y
+        elif match.group(0) == "do()":
+            # Enable future mul instructions
+            mul_enabled = True
+        elif match.group(0) == "don't()":
+            # Disable future mul instructions
+            mul_enabled = False
+
+    print(f"Total sum: {total_sum}")
 
 
 def part1():
@@ -37,9 +59,12 @@ def part1():
     add_mul(reader)
 
 
-# def part2():
-#     reader_test = FileInputReader(f"day_{number}_input_test.txt")
-#     reader = FileInputReader(f"day_{number}_input.txt")
+def part2():
+    reader_test = FileInputReader(f"day_{number}_input_test.txt")
+    reader = FileInputReader(f"day_{number}_input.txt")
+
+    sum_enabled_mul_instructions(reader_test)
+    sum_enabled_mul_instructions(reader)
 
 
 def run():
@@ -47,4 +72,4 @@ def run():
     part1()
 
     print("\nStart part 2")
-    # part2()
+    part2()
