@@ -44,6 +44,22 @@ class FileInputReader:
             print(f"Error while reading the file: {e}")
             return []
 
+    def get_entire_content(self):
+        """
+        Read the entire content of the file as a single string.
+
+        Returns:
+            str: The entire content of the file as one string.
+        """
+        try:
+            with open(self.file_path, "r") as file:
+                return file.read().strip()
+        except FileNotFoundError:
+            print(f"Error: File {self.file_path} not found.")
+        except Exception as e:
+            print(f"Error while reading the file: {e}")
+            return ""
+
     def get_one_line(self):
         """
         Return all lines as a one line
