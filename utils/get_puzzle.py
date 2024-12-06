@@ -1,6 +1,9 @@
-import requests
-import sys
 import os
+import sys
+
+import requests
+
+from utils.get_cookie import get_aoc_session_cookie
 
 
 def fetch_puzzle_input(day: int, session_cookie: str):
@@ -50,8 +53,7 @@ def fetch_puzzle_input(day: int, session_cookie: str):
 
 if __name__ == "__main__":
     # Replace this with your session cookie
-    session_cookie = "53616c7465645f5f0f2b7c62c9462b6a4f4e93a99d9fc8059eded855aacf3af7f86e35de004c96becf639b9e208a8e1e9862c47f52da37317856535397749ef2"
-    # get_aoc_session_cookie()
+    session_cookie = get_aoc_session_cookie()
     print(f"Fetched session cookie: {session_cookie}")
 
     if len(sys.argv) != 2:
