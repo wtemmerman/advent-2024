@@ -44,6 +44,15 @@ class FileInputReader:
             print(f"Error while reading the file: {e}")
             return []
 
+    def get_one_line(self):
+        """
+        Return all lines as a one line
+
+        Returns:
+            str: A string as one line
+        """
+        return "".join(self.read_all_lines())
+
     def process_lines(self, func):
         """
         Apply a function to each line in the file.

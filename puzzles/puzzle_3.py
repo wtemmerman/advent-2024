@@ -11,7 +11,7 @@ number = get_puzzle_number(filename)
 
 def add_mul(reader: FileInputReader):
     print(f"Reading file {reader.file_path}:")
-    corrupted_memory = "".join(reader.read_all_lines())
+    corrupted_memory = reader.get_one_line()
 
     pattern = r"mul\((\d{1,3}),(\d{1,3})\)"
     matches = re.findall(pattern, corrupted_memory)
@@ -26,7 +26,7 @@ def add_mul(reader: FileInputReader):
 
 def sum_enabled_mul_instructions(reader: FileInputReader):
     print(f"Reading file {reader.file_path}:")
-    corrupted_memory = "".join(reader.read_all_lines())
+    corrupted_memory = reader.get_one_line()
 
     mul_regex = r"mul\((\d+),(\d+)\)"
     control_regex = r"do\(\)|don't\(\)"
