@@ -26,15 +26,16 @@ def get_list(reader: FileInputReader, need_to_be_order: bool = True) -> tuple[li
     return left_list, right_list
 
 
-def calculate_diff(reader: FileInputReader):
+def calculate_diff(reader: FileInputReader) -> int:
     left_list, right_list = get_list(reader)
 
     total_distance = sum(abs(left - right) for left, right in zip(left_list, right_list))
 
     print(total_distance)
+    return total_distance
 
 
-def calculate_similarity(reader: FileInputReader):
+def calculate_similarity(reader: FileInputReader) -> int:
     left_list, right_list = get_list(reader, need_to_be_order=False)
 
     total_similarity = 0
@@ -46,22 +47,23 @@ def calculate_similarity(reader: FileInputReader):
         # print(f'TMP TS {total_similarity}')
 
     print(total_similarity)
+    return total_similarity
 
 
 def part1():
     reader_test = FileInputReader(f"day_{number}_input_test.txt")
     reader = FileInputReader(f"day_{number}_input.txt")
 
-    calculate_diff(reader_test)
-    calculate_diff(reader)
+    assert calculate_diff(reader_test) == 11
+    assert calculate_diff(reader) == 1197984
 
 
 def part2():
     reader_test = FileInputReader(f"day_{number}_input_test.txt")
     reader = FileInputReader(f"day_{number}_input.txt")
 
-    calculate_similarity(reader_test)
-    calculate_similarity(reader)
+    assert calculate_similarity(reader_test) == 31
+    assert calculate_similarity(reader) == 23387399
 
 
 def run():

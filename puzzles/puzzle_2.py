@@ -29,7 +29,7 @@ def is_safe_with_dampener(elements: list[int]) -> bool:
     return False
 
 
-def found_safe_report(reader: FileInputReader):
+def found_safe_report(reader: FileInputReader) -> int:
     print(f"Reading file {reader.file_path} line by line:")
     safe_count = 0
     for line in reader.read_line_by_line():
@@ -40,9 +40,10 @@ def found_safe_report(reader: FileInputReader):
         if is_safe(elements):
             safe_count += 1
     print(safe_count)
+    return safe_count
 
 
-def found_safe_report_with_dampener(reader: FileInputReader):
+def found_safe_report_with_dampener(reader: FileInputReader) -> int:
     print(f"Reading file {reader.file_path} line by line:")
     safe_count = 0
 
@@ -52,22 +53,23 @@ def found_safe_report_with_dampener(reader: FileInputReader):
         if is_safe(elements) or is_safe_with_dampener(elements):
             safe_count += 1
     print(safe_count)
+    return safe_count
 
 
 def part1():
     reader_test = FileInputReader(f"day_{number}_input_test.txt")
     reader = FileInputReader(f"day_{number}_input.txt")
 
-    found_safe_report(reader_test)
-    found_safe_report(reader)
+    assert found_safe_report(reader_test) == 2
+    assert found_safe_report(reader) == 369
 
 
 def part2():
     reader_test = FileInputReader(f"day_{number}_input_test.txt")
     reader = FileInputReader(f"day_{number}_input.txt")
 
-    found_safe_report_with_dampener(reader_test)
-    found_safe_report_with_dampener(reader)
+    assert found_safe_report_with_dampener(reader_test) == 4
+    assert found_safe_report_with_dampener(reader) == 428
 
 
 def run():

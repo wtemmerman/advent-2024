@@ -9,7 +9,7 @@ filename = os.path.basename(__file__)
 number = get_puzzle_number(filename)
 
 
-def add_mul(reader: FileInputReader):
+def add_mul(reader: FileInputReader) -> int:
     print(f"Reading file {reader.file_path}:")
     corrupted_memory = reader.get_one_line()
 
@@ -22,9 +22,10 @@ def add_mul(reader: FileInputReader):
         # print(f"Valid instruction: mul({x},{y}) = {product}")
 
     print(f"Total sum: {total}")
+    return total
 
 
-def sum_enabled_mul_instructions(reader: FileInputReader):
+def sum_enabled_mul_instructions(reader: FileInputReader) -> int:
     print(f"Reading file {reader.file_path}:")
     corrupted_memory = reader.get_one_line()
 
@@ -49,22 +50,23 @@ def sum_enabled_mul_instructions(reader: FileInputReader):
             mul_enabled = False
 
     print(f"Total sum: {total_sum}")
+    return total_sum
 
 
 def part1():
     reader_test = FileInputReader(f"day_{number}_input_test.txt")
     reader = FileInputReader(f"day_{number}_input.txt")
 
-    add_mul(reader_test)
-    add_mul(reader)
+    assert add_mul(reader_test) == 161
+    assert add_mul(reader) == 178886550
 
 
 def part2():
-    reader_test = FileInputReader(f"day_{number}_input_test.txt")
+    reader_test = FileInputReader(f"day_{number}_input_test_2.txt")
     reader = FileInputReader(f"day_{number}_input.txt")
 
-    sum_enabled_mul_instructions(reader_test)
-    sum_enabled_mul_instructions(reader)
+    assert sum_enabled_mul_instructions(reader_test) == 48
+    assert sum_enabled_mul_instructions(reader) == 87163705
 
 
 def run():
