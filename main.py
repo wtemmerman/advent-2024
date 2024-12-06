@@ -1,6 +1,6 @@
 import sys
 
-from puzzles import puzzle_1, puzzle_2, puzzle_3, puzzle_4, puzzle_5
+from puzzles import puzzle_1, puzzle_2, puzzle_3, puzzle_4, puzzle_5, puzzle_6
 
 
 def run_puzzle(day: int):
@@ -10,6 +10,7 @@ def run_puzzle(day: int):
         3: puzzle_3.run,
         4: puzzle_4.run,
         5: puzzle_5.run,
+        6: puzzle_6.run,
     }
     if day in puzzle_mapping:
         print(f"Running Puzzle {day}...")
